@@ -12,7 +12,7 @@ let increment = 1;
 
 links.forEach((link, index) => {
     if (links[index].classList.contains("active")) {
-        light.style.left= `${links[index].offsetLeft + light.offset.Width / 4}px`;
+        light.style.left= `${links[index].offsetLeft + light.offsetWidth / 4}px`;
     }
 
     link.addEventListener("click", (e) => {
@@ -36,6 +36,6 @@ links.forEach((link, index) => {
             }
         }, 50);
 
-        light.style.left = `${e.target.offsetLeft + light.offset.Width / 4}px`;
+        light.style.left = `${e.target.offsetLeft + light.offsetWidth / 4}px`;
     });
 });
