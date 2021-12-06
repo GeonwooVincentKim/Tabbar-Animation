@@ -7,7 +7,7 @@
 
     <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <script src="./js/index.js" type="text/javascript"></script>
+    <!-- <script src="./js/index.js" type="text/javascript"></script> -->
 
     <title>Document</title>
 </head>
@@ -23,5 +23,49 @@
             <div class="light-ray"></div>
         </div>
     </nav>
+
+    <script>
+        // console.log("Hello World");
+
+        const uls = document.querySelectorAll(".menu-tab-bar ul");
+        const links = [...document.querySelectorAll(".menu-tab-bar a")];
+        const light = document.querySelector(".menu-tab-bar .tube-light");
+        console.log(light);
+        // document.querySelectByClassname()
+
+        let activeIndex = 0;
+        let cursorIndex = 0;
+        let increment = 1;
+
+        links.forEach((link, index) => {
+            if (links[index].classList.contains("active")) {
+                light.style.left= `${links[index].offsetLeft + light.offsetWidth  / 4}px`;
+                console.log(links[index].offsetLeft);
+            }
+
+            link.addEventListener("click", (e) => {
+                activeIndex = index;
+                console.log(activeIndex);
+
+                let t = setInterval(() => {
+                    if (activeIndex > cursorIndex) increment = 1;
+                    else if (activeIndex < cursorIndex) increment = -1;
+                    
+                    cursorIndex += increment;
+                    links[cursorIndex].classList.add("active");
+
+                    if(cursorIndex != -1) links[cursorIndex -increment].classList.remove("active");
+
+                    if(cursorIndex == activeIndex) {
+                        e.target.classList.add("active");
+                        increment = 0;
+                        clearInterval(t);
+                    }
+                }, 50);
+
+                light.style.left = `${e.target.offsetLeft + light.offsetWidth / 4}px`;
+            });
+        });
+    </script>
 </body>
 </html>
